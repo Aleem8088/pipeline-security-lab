@@ -1,0 +1,403 @@
+ INFO zizmor: 🌈 zizmor v1.33.1
+ WARN audit: zizmor: zizmor is running in offline mode by default; some audits and auto-fixes will not be available. see https://docs.zizmor.sh/usage/#operating-modes for details
+ INFO audit: zizmor: 🌈 completed .\.github\dependabot.yml
+ INFO audit: zizmor: 🌈 completed .\.github\workflows\ci.yml
+ INFO audit: zizmor: 🌈 completed .\.github\workflows\demo-ai-injection.yml
+ INFO audit: zizmor: 🌈 completed .\.github\workflows\demo-egress-block.yml
+ INFO audit: zizmor: 🌈 completed .\.github\workflows\demo-movable-tag.yml
+ INFO audit: zizmor: 🌈 completed .\.github\workflows\demo-oidc-limits.yml
+ INFO audit: zizmor: 🌈 completed .\.github\workflows\demo-token-power.yml
+ INFO audit: zizmor: 🌈 completed .\.github\workflows\pr-greeter.yml
+ INFO audit: zizmor: 🌈 completed .\.github\workflows\zizmor.yml
+info[anonymous-definition]: workflow or action definition without a name
+  --> .\.github\workflows\ci.yml:10:3
+   |
+10 |   test:
+   |   ^^^^ this job
+   |
+   = note: audit confidence → High
+   = tip: use 'name: ...' to give this job a name
+   = help: audit documentation → https://docs.zizmor.sh/audits/#anonymous-definition
+
+info[anonymous-definition]: workflow or action definition without a name
+  --> .\.github\workflows\ci.yml:32:3
+   |
+32 |   build:
+   |   ^^^^^ this job
+   |
+   = note: audit confidence → High
+   = tip: use 'name: ...' to give this job a name
+   = help: audit documentation → https://docs.zizmor.sh/audits/#anonymous-definition
+
+info[anonymous-definition]: workflow or action definition without a name
+   --> .\.github\workflows\ci.yml:108:3
+    |
+108 |   deploy:
+    |   ^^^^^^ this job
+    |
+    = note: audit confidence → High
+    = tip: use 'name: ...' to give this job a name
+    = help: audit documentation → https://docs.zizmor.sh/audits/#anonymous-definition
+
+help[concurrency-limits]: insufficient job-level concurrency limits
+   --> .\.github\workflows\ci.yml:3:1
+    |
+  3 | on: [push, pull_request]
+    | ^^^^^^^^^^^^^^^^^^^^^^^^ workflow is missing concurrency setting
+...
+ 10 |   test:
+    |   ---- job affected by missing workflow concurrency
+...
+ 32 |   build:
+    |   ----- job affected by missing workflow concurrency
+...
+108 |   deploy:
+    |   ------ job affected by missing workflow concurrency
+    |
+    = note: audit confidence → High
+    = help: audit documentation → https://docs.zizmor.sh/audits/#concurrency-limits
+
+info[anonymous-definition]: workflow or action definition without a name
+  --> .\.github\workflows\demo-ai-injection.yml:16:3
+   |
+16 |   vulnerable:
+   |   ^^^^^^^^^^ this job
+   |
+   = note: audit confidence → High
+   = tip: use 'name: ...' to give this job a name
+   = help: audit documentation → https://docs.zizmor.sh/audits/#anonymous-definition
+
+info[anonymous-definition]: workflow or action definition without a name
+  --> .\.github\workflows\demo-ai-injection.yml:33:3
+   |
+33 |   analyze:
+   |   ^^^^^^^ this job
+   |
+   = note: audit confidence → High
+   = tip: use 'name: ...' to give this job a name
+   = help: audit documentation → https://docs.zizmor.sh/audits/#anonymous-definition
+
+info[anonymous-definition]: workflow or action definition without a name
+  --> .\.github\workflows\demo-ai-injection.yml:53:3
+   |
+53 |   apply:
+   |   ^^^^^ this job
+   |
+   = note: audit confidence → High
+   = tip: use 'name: ...' to give this job a name
+   = help: audit documentation → https://docs.zizmor.sh/audits/#anonymous-definition
+
+help[concurrency-limits]: insufficient job-level concurrency limits
+  --> .\.github\workflows\demo-ai-injection.yml:4:1
+   |
+ 4 | / on:
+ 5 | |   workflow_dispatch:
+ 6 | |     inputs:
+ 7 | |       fixture:
+...  |
+10 | |         options: [benign, injected]
+11 | |         default: injected
+   | |_________________________^ workflow is missing concurrency setting
+...
+16 |     vulnerable:
+   |     ---------- job affected by missing workflow concurrency
+...
+33 |     analyze:
+   |     ------- job affected by missing workflow concurrency
+...
+53 |     apply:
+   |     ----- job affected by missing workflow concurrency
+   |
+   = note: audit confidence → High
+   = help: audit documentation → https://docs.zizmor.sh/audits/#concurrency-limits
+
+warning[secrets-outside-env]: secrets referenced without a dedicated environment
+  --> .\.github\workflows\demo-ai-injection.yml:28:31
+   |
+16 |   vulnerable:
+   |   ---------- this job
+...
+28 |           DEMO_API_TOKEN: ${{ secrets.DEMO_API_TOKEN }}
+   |                               ^^^^^^^^^^^^^^^^^^^^^^ secret is accessed outside of a dedicated environment
+   |
+   = note: audit confidence → High
+   = help: audit documentation → https://docs.zizmor.sh/audits/#secrets-outside-env
+
+info[anonymous-definition]: workflow or action definition without a name
+  --> .\.github\workflows\demo-egress-block.yml:10:3
+   |
+10 |   egress:
+   |   ^^^^^^ this job
+   |
+   = note: audit confidence → High
+   = tip: use 'name: ...' to give this job a name
+   = help: audit documentation → https://docs.zizmor.sh/audits/#anonymous-definition
+
+help[concurrency-limits]: insufficient job-level concurrency limits
+  --> .\.github\workflows\demo-egress-block.yml:5:1
+   |
+ 5 | on: workflow_dispatch
+   | ^^^^^^^^^^^^^^^^^^^^^ workflow is missing concurrency setting
+...
+10 |   egress:
+   |   ------ job affected by missing workflow concurrency
+   |
+   = note: audit confidence → High
+   = help: audit documentation → https://docs.zizmor.sh/audits/#concurrency-limits
+
+info[anonymous-definition]: workflow or action definition without a name
+  --> .\.github\workflows\demo-movable-tag.yml:11:3
+   |
+11 |   run-action:
+   |   ^^^^^^^^^^ this job
+   |
+   = note: audit confidence → High
+   = tip: use 'name: ...' to give this job a name
+   = help: audit documentation → https://docs.zizmor.sh/audits/#anonymous-definition
+
+help[concurrency-limits]: insufficient job-level concurrency limits
+  --> .\.github\workflows\demo-movable-tag.yml:5:1
+   |
+ 5 | on: workflow_dispatch
+   | ^^^^^^^^^^^^^^^^^^^^^ workflow is missing concurrency setting
+...
+11 |   run-action:
+   |   ---------- job affected by missing workflow concurrency
+   |
+   = note: audit confidence → High
+   = help: audit documentation → https://docs.zizmor.sh/audits/#concurrency-limits
+
+help[undocumented-permissions]: permissions without explanatory comments
+  --> .\.github\workflows\demo-oidc-limits.yml:14:7
+   |
+14 |       id-token: write
+   |       ^^^^^^^^^^^^^^^ needs an explanatory comment
+   |
+   = note: audit confidence → High
+   = help: audit documentation → https://docs.zizmor.sh/audits/#undocumented-permissions
+
+help[undocumented-permissions]: permissions without explanatory comments
+  --> .\.github\workflows\demo-oidc-limits.yml:26:7
+   |
+26 |       id-token: write
+   |       ^^^^^^^^^^^^^^^ needs an explanatory comment
+   |
+   = note: audit confidence → High
+   = help: audit documentation → https://docs.zizmor.sh/audits/#undocumented-permissions
+
+info[anonymous-definition]: workflow or action definition without a name
+  --> .\.github\workflows\demo-oidc-limits.yml:11:3
+   |
+11 |   wrong-subject:
+   |   ^^^^^^^^^^^^^ this job
+   |
+   = note: audit confidence → High
+   = tip: use 'name: ...' to give this job a name
+   = help: audit documentation → https://docs.zizmor.sh/audits/#anonymous-definition
+
+info[anonymous-definition]: workflow or action definition without a name
+  --> .\.github\workflows\demo-oidc-limits.yml:22:3
+   |
+22 |   read-only-role:
+   |   ^^^^^^^^^^^^^^ this job
+   |
+   = note: audit confidence → High
+   = tip: use 'name: ...' to give this job a name
+   = help: audit documentation → https://docs.zizmor.sh/audits/#anonymous-definition
+
+help[concurrency-limits]: insufficient job-level concurrency limits
+  --> .\.github\workflows\demo-oidc-limits.yml:6:1
+   |
+ 6 | on: workflow_dispatch
+   | ^^^^^^^^^^^^^^^^^^^^^ workflow is missing concurrency setting
+...
+11 |   wrong-subject:
+   |   ------------- job affected by missing workflow concurrency
+...
+22 |   read-only-role:
+   |   -------------- job affected by missing workflow concurrency
+   |
+   = note: audit confidence → High
+   = help: audit documentation → https://docs.zizmor.sh/audits/#concurrency-limits
+
+warning[secrets-outside-env]: secrets referenced without a dedicated environment
+  --> .\.github\workflows\demo-oidc-limits.yml:18:26
+   |
+11 |   wrong-subject:
+   |   ------------- this job
+...
+18 |           client-id: ${{ secrets.AZURE_CLIENT_ID_OIDC }}
+   |                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ secret is accessed outside of a dedicated environment
+   |
+   = note: audit confidence → High
+   = help: audit documentation → https://docs.zizmor.sh/audits/#secrets-outside-env
+
+warning[secrets-outside-env]: secrets referenced without a dedicated environment
+  --> .\.github\workflows\demo-oidc-limits.yml:19:26
+   |
+11 |   wrong-subject:
+   |   ------------- this job
+...
+19 |           tenant-id: ${{ secrets.AZURE_TENANT_ID_OIDC }}
+   |                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ secret is accessed outside of a dedicated environment
+   |
+   = note: audit confidence → High
+   = help: audit documentation → https://docs.zizmor.sh/audits/#secrets-outside-env
+
+warning[secrets-outside-env]: secrets referenced without a dedicated environment
+  --> .\.github\workflows\demo-oidc-limits.yml:20:32
+   |
+11 |   wrong-subject:
+   |   ------------- this job
+...
+20 |           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+   |                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ secret is accessed outside of a dedicated environment
+   |
+   = note: audit confidence → High
+   = help: audit documentation → https://docs.zizmor.sh/audits/#secrets-outside-env
+
+help[template-injection]: code injection via template expansion
+  --> .\.github\workflows\demo-token-power.yml:16:37
+   |
+15 |         run: |
+   |         --- this run block
+16 |           gh api -X POST "repos/${{ github.repository }}/git/refs" \
+   |                                     ^^^^^^^^^^^^^^^^^ may expand into attacker-controllable code
+   |
+   = note: audit confidence → High
+   = help: audit documentation → https://docs.zizmor.sh/audits/#template-injection
+
+help[template-injection]: code injection via template expansion
+  --> .\.github\workflows\demo-token-power.yml:17:62
+   |
+15 |         run: |
+   |         --- this run block
+16 |           gh api -X POST "repos/${{ github.repository }}/git/refs" \
+17 |             -f ref="refs/heads/token-demo-broad" -f sha="${{ github.sha }}" --jq '.ref'
+   |                                                              ^^^^^^^^^^ may expand into attacker-controllable code
+   |
+   = note: audit confidence → High
+   = help: audit documentation → https://docs.zizmor.sh/audits/#template-injection
+
+help[template-injection]: code injection via template expansion
+  --> .\.github\workflows\demo-token-power.yml:18:39
+   |
+15 |         run: |
+   |         --- this run block
+...
+18 |           gh api -X DELETE "repos/${{ github.repository }}/git/refs/heads/token-demo-broad" && echo "cleaned up"
+   |                                       ^^^^^^^^^^^^^^^^^ may expand into attacker-controllable code
+   |
+   = note: audit confidence → High
+   = help: audit documentation → https://docs.zizmor.sh/audits/#template-injection
+
+help[template-injection]: code injection via template expansion
+  --> .\.github\workflows\demo-token-power.yml:29:37
+   |
+28 |         run: |
+   |         --- this run block
+29 |           gh api -X POST "repos/${{ github.repository }}/git/refs" \
+   |                                     ^^^^^^^^^^^^^^^^^ may expand into attacker-controllable code
+   |
+   = note: audit confidence → High
+   = help: audit documentation → https://docs.zizmor.sh/audits/#template-injection
+
+help[template-injection]: code injection via template expansion
+  --> .\.github\workflows\demo-token-power.yml:30:64
+   |
+28 |         run: |
+   |         --- this run block
+29 |           gh api -X POST "repos/${{ github.repository }}/git/refs" \
+30 |             -f ref="refs/heads/token-demo-minimal" -f sha="${{ github.sha }}" --jq '.ref'
+   |                                                                ^^^^^^^^^^ may expand into attacker-controllable code
+   |
+   = note: audit confidence → High
+   = help: audit documentation → https://docs.zizmor.sh/audits/#template-injection
+
+info[anonymous-definition]: workflow or action definition without a name
+ --> .\.github\workflows\demo-token-power.yml:8:3
+  |
+8 |   broad:
+  |   ^^^^^ this job
+  |
+  = note: audit confidence → High
+  = tip: use 'name: ...' to give this job a name
+  = help: audit documentation → https://docs.zizmor.sh/audits/#anonymous-definition
+
+info[anonymous-definition]: workflow or action definition without a name
+  --> .\.github\workflows\demo-token-power.yml:20:3
+   |
+20 |   minimal:
+   |   ^^^^^^^ this job
+   |
+   = note: audit confidence → High
+   = tip: use 'name: ...' to give this job a name
+   = help: audit documentation → https://docs.zizmor.sh/audits/#anonymous-definition
+
+help[concurrency-limits]: insufficient job-level concurrency limits
+  --> .\.github\workflows\demo-token-power.yml:5:1
+   |
+ 5 | on: workflow_dispatch
+   | ^^^^^^^^^^^^^^^^^^^^^ workflow is missing concurrency setting
+...
+ 8 |   broad:
+   |   ----- job affected by missing workflow concurrency
+...
+20 |   minimal:
+   |   ------- job affected by missing workflow concurrency
+   |
+   = note: audit confidence → High
+   = help: audit documentation → https://docs.zizmor.sh/audits/#concurrency-limits
+
+info[anonymous-definition]: workflow or action definition without a name
+  --> .\.github\workflows\pr-greeter.yml:13:3
+   |
+13 |   greet:
+   |   ^^^^^ this job
+   |
+   = note: audit confidence → High
+   = tip: use 'name: ...' to give this job a name
+   = help: audit documentation → https://docs.zizmor.sh/audits/#anonymous-definition
+
+help[concurrency-limits]: insufficient job-level concurrency limits
+  --> .\.github\workflows\pr-greeter.yml:5:1
+   |
+ 5 | / on:
+ 6 | |   pull_request:
+ 7 | |     types: [opened, edited]
+ 8 | |
+ 9 | | # Fix 2: the token gets no permissions. This job only prints a message.
+   | |_______________________________________________________________________^ workflow is missing concurrency setting
+...
+13 |     greet:
+   |     ----- job affected by missing workflow concurrency
+   |
+   = note: audit confidence → High
+   = help: audit documentation → https://docs.zizmor.sh/audits/#concurrency-limits
+
+info[anonymous-definition]: workflow or action definition without a name
+  --> .\.github\workflows\zizmor.yml:13:3
+   |
+13 |   zizmor:
+   |   ^^^^^^ this job
+   |
+   = note: audit confidence → High
+   = tip: use 'name: ...' to give this job a name
+   = help: audit documentation → https://docs.zizmor.sh/audits/#anonymous-definition
+
+help[concurrency-limits]: insufficient job-level concurrency limits
+  --> .\.github\workflows\zizmor.yml:5:1
+   |
+ 5 | / on:
+ 6 | |   push:
+ 7 | |     branches: [main]
+ 8 | |   pull_request:
+   | |_______________^ workflow is missing concurrency setting
+...
+13 |     zizmor:
+   |     ------ job affected by missing workflow concurrency
+   |
+   = note: audit confidence → High
+   = help: audit documentation → https://docs.zizmor.sh/audits/#concurrency-limits
+
+35 findings (2 ignored): 14 informational, 15 low, 4 medium, 0 high

@@ -1,0 +1,7 @@
+zizmor 1.33.1, measured 2026-11-27, same two files (ci.yml, pr-greeter.yml), before-state tag vs main at 016c885
+BEFORE regular persona : 10 findings (8 high, 2 medium) on the before-state tag (before-zizmor.txt)
+BEFORE auditor persona : 21 findings: 4 informational, 2 low, 6 medium, 9 high
+AFTER  auditor persona : 6 findings: 4 informational, 2 low, 0 medium, 0 high
+AFTER  regular persona : No findings (6 suppressed)
+Whole repo, regular    : No findings (1 ignored, 34 suppressed)
+Whole repo, auditor    : 35 findings (2 ignored): 14 anonymous-definition (info), 8 concurrency-limits, 5 template-injection (low, all in demo-token-power.yml), 2 undocumented-permissions (demo-oidc-limits.yml), 4 secrets-outside-env (demo-ai-injection.yml, demo-oidc-limits.yml)
