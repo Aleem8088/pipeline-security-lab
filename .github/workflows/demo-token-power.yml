@@ -7,7 +7,7 @@ on: workflow_dispatch
 jobs:
   broad:
     runs-on: ubuntu-latest
-    permissions: write-all
+    permissions: write-all   # zizmor: ignore[excessive-permissions] -- deliberate, this demo shows what a broad token can do
     steps:
       - name: Try to create a branch (broad token)
         env:
