@@ -4,7 +4,7 @@ All run on my own repos on 2026-11-27 with dummy canary secrets. Nothing real wa
 
 ## Demo 1: script injection through a PR title (weakness a)
 PR #1 title: `hi"; echo "$DEMO_API_TOKEN" | base64; echo "`
-The `pr-greeter` workflow pasted the title into a shell script. The log printed the base64 of the dummy token (`Q0FOQVJZ...`), which decodes to `CANARY-demo-token-not-a-real-secret`. GitHub's log masking showed `***` for the exact secret but not for its base64 form.
+The `pr-greeter` workflow pasted the title into a shell script. The log printed the base64 of the dummy token (`Q0FOQVJZ...`), which decodes to `CANARY-demo-token-not-a-real-secret`. GitHub's log masking showed `***` for the exact secret. The base64 form printed here because `echo | base64` also encodes a trailing newline; a later test (docs/ai-injection.md) showed an exact-value base64 copy being masked. Masking is a best-effort string match, not a boundary.
 Evidence: `img/pr1.png`, `img/run-greeter.png`, `measurements/demo1-greeter-log.txt`.
 
 GitHub's run page also showed: "On December 2, 2026, GitHub will restrict `pull_request_target` on public repositories by default." (Docs: https://docs.github.com/en/actions/reference/security/securely-using-pull_request_target . The page says the default policy does not address command injection.)
