@@ -1,0 +1,30 @@
+name: demo-token-power
+
+# DEMO: shows what the built-in GITHUB_TOKEN can do with broad vs. minimal permissions.
+# Both jobs try the same thing: create a branch in this repo, then delete it.
+on: workflow_dispatch
+
+jobs:
+  broad:
+    runs-on: ubuntu-latest
+    permissions: write-all
+    steps:
+      - name: Try to create a branch (broad token)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api -X POST "repos/${{ github.repository }}/git/refs" \
+            -f ref="refs/heads/token-demo-broad" -f sha="${{ github.sha }}" --jq '.ref'
+          gh api -X DELETE "repos/${{ github.repository }}/git/refs/heads/token-demo-broad" && echo "cleaned up"
+
+  minimal:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Try to create a branch (read-only token)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api -X POST "repos/${{ github.repository }}/git/refs" \
+            -f ref="refs/heads/token-demo-minimal" -f sha="${{ github.sha }}" --jq '.ref'
