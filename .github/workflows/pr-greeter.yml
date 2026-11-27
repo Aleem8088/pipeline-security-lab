@@ -15,10 +15,9 @@ jobs:
     steps:
       # Fix 3: the PR title is passed as an environment variable (data), never pasted into the
       # script text. The shell reads "$PR_TITLE" at run time and does not parse it as commands.
-      # DEMO_API_TOKEN is still mapped on purpose, to prove it no longer leaks (removed in Fix 3b).
+      # Fix 3b: this job does not need any secret, so none is passed to it.
       - name: Say thanks
         env:
           PR_TITLE: ${{ github.event.pull_request.title }}
-          DEMO_API_TOKEN: ${{ secrets.DEMO_API_TOKEN }}
         run: |
           echo "Thanks for the pull request: $PR_TITLE"
