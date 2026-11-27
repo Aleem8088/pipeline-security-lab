@@ -1,9 +1,9 @@
 name: pr-greeter
 
-# PARTLY HARDENED (see docs/fixes.md). The trigger below is still risky by design.
-# pull_request_target runs with repo secrets, even for pull requests from forks.
+# HARDENED (see docs/fixes.md). Fix 3c: plain pull_request, which does not give fork PRs secrets.
+# This job only prints a message, so it never needed the privileged pull_request_target trigger.
 on:
-  pull_request_target:
+  pull_request:
     types: [opened, edited]
 
 # Fix 2: the token gets no permissions. This job only prints a message.
