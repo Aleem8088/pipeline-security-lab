@@ -1,0 +1,10 @@
+name: unpinned-example
+on: pull_request
+permissions: {}
+jobs:
+  x:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
