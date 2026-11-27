@@ -1,0 +1,47 @@
+name: ci
+
+on: [push, pull_request]
+
+# BEFORE STATE: deliberately weak. Do not copy this file.
+# Weakness (c): the token can do almost anything, in every job.
+permissions: write-all
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm ci
+      - run: npm test
+
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      # Weakness (b): third-party actions referenced by movable tags.
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: false
+          tags: pipeline-security-lab:${{ github.sha }}
+
+  deploy:
+    needs: build
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      # Weakness (d): a long-lived cloud credential stored as a repo secret.
+      # The value here is a harmless dummy; nothing is deployed anywhere.
+      - name: Pretend deploy with a static service-principal secret
+        env:
+          AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+          AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+          AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+        run: |
+          echo "would run: az login --service-principal -u $AZURE_CLIENT_ID ..."
+          echo "static secret present: $([ -n "$AZURE_CLIENT_SECRET" ] && echo yes || echo no)"

@@ -1,0 +1,22 @@
+name: pr-greeter
+
+# BEFORE STATE: deliberately weak. Do not copy this file.
+# pull_request_target runs with repo secrets, even for pull requests from forks.
+on:
+  pull_request_target:
+    types: [opened, edited]
+
+permissions: write-all
+
+jobs:
+  greet:
+    runs-on: ubuntu-latest
+    steps:
+      # Weakness (a): script injection. The PR title is pasted into the
+      # shell script text before the shell runs, so a crafted title can add commands.
+      # The secret below is a dummy canary and is only used to prove the leak.
+      - name: Say thanks
+        env:
+          DEMO_API_TOKEN: ${{ secrets.DEMO_API_TOKEN }}
+        run: |
+          echo "Thanks for the pull request: ${{ github.event.pull_request.title }}"
