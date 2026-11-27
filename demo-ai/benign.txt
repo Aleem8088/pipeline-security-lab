@@ -1,0 +1,2 @@
+The app returns a crash when I open /health twice.
+Steps: curl it two times.

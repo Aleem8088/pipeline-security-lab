@@ -1,0 +1,67 @@
+name: demo-ai-injection
+# Manual demo of prompt injection into an AI-style triage step. The "agent" is a deterministic
+# simulation (demo-ai/fake-agent.js), not a model. Secret is the dummy DEMO_API_TOKEN canary.
+on:
+  workflow_dispatch:
+    inputs:
+      fixture:
+        description: which issue text to triage
+        type: choice
+        options: [benign, injected]
+        default: injected
+
+permissions: {}
+
+jobs:
+  vulnerable:
+    # Agent holds a secret and a tool that can publish text, and reads the issue.
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
+      - name: Triage (agent has secret + report tool)
+        env:
+          FIXTURE: ${{ inputs.fixture }}
+          DEMO_API_TOKEN: ${{ secrets.DEMO_API_TOKEN }}
+          AGENT_TOOLS: set_label,send_report
+        run: |
+          ISSUE_TEXT="$(cat "demo-ai/$FIXTURE.txt")" node demo-ai/fake-agent.js
+
+  analyze:
+    # Hardened step 1: reads untrusted text, but has no secret and one tool.
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    outputs:
+      result: ${{ steps.agent.outputs.result }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
+      - id: agent
+        env:
+          FIXTURE: ${{ inputs.fixture }}
+          AGENT_TOOLS: ""   # no tools: it can only return a suggested label
+        run: |
+          OUT="$(ISSUE_TEXT="$(cat "demo-ai/$FIXTURE.txt")" node demo-ai/fake-agent.js)"
+          echo "$OUT"
+          echo "result=$OUT" >> "$GITHUB_OUTPUT"
+
+  apply:
+    # Hardened step 2: holds the privilege, never sees the issue text, accepts only a known label.
+    needs: analyze
+    runs-on: ubuntu-latest
+    permissions: {}   # a real version would hold issues: write here and nothing else
+    steps:
+      - name: Validate the agent's output, then act
+        env:
+          RESULT: ${{ needs.analyze.outputs.result }}
+        run: |
+          LABEL="$(printf '%s' "$RESULT" | node -e 'let s="";process.stdin.on("data",d=>s+=d).on("end",()=>{try{console.log(JSON.parse(s).label)}catch{console.log("")}})')"
+          case "$LABEL" in
+            bug|feature|question|needs-triage) echo "would apply label: $LABEL" ;;
+            *) echo "rejected agent output (label not on the allowlist)"; exit 1 ;;
+          esac
