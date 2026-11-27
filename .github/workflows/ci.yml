@@ -12,6 +12,9 @@ jobs:
     permissions:
       contents: read
     steps:
+      - uses: step-security/harden-runner@aebdcf6156ab6691adf63218240e476564a1ed4c # v2.23.0
+        with:
+          egress-policy: audit   # first watch what each job connects to; block mode comes after
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           persist-credentials: false
@@ -27,6 +30,9 @@ jobs:
     permissions:
       contents: read
     steps:
+      - uses: step-security/harden-runner@aebdcf6156ab6691adf63218240e476564a1ed4c # v2.23.0
+        with:
+          egress-policy: audit   # first watch what each job connects to; block mode comes after
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           persist-credentials: false
@@ -46,6 +52,9 @@ jobs:
     permissions:
       id-token: write   # lets this job ask GitHub for a short-lived identity token; it grants no repo access
     steps:
+      - uses: step-security/harden-runner@aebdcf6156ab6691adf63218240e476564a1ed4c # v2.23.0
+        with:
+          egress-policy: audit   # first watch what each job connects to; block mode comes after
       # Fix 4: no stored password. The job proves who it is with a short-lived OIDC token, and
       # Azure only accepts it for this repo's "production" environment (see infra/setup-azure-oidc.sh).
       # The three values below are identifiers, not credentials.
