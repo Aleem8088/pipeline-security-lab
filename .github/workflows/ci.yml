@@ -2,13 +2,15 @@ name: ci
 
 on: [push, pull_request]
 
-# BEFORE STATE: deliberately weak. Do not copy this file.
-# Weakness (c): the token can do almost anything, in every job.
-permissions: write-all
+# PARTLY HARDENED (see docs/fixes.md). Still weak on purpose: the static secret in the deploy job.
+# Fix 2: no permissions by default; each job asks for only what it needs.
+permissions: {}
 
 jobs:
   test:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
@@ -22,6 +24,8 @@ jobs:
   build:
     needs: test
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
@@ -38,6 +42,7 @@ jobs:
     needs: build
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
+    permissions: {}   # this job only runs a script; it needs no repo access at all
     steps:
       # Weakness (d): a long-lived cloud credential stored as a repo secret.
       # The value here is a harmless dummy; nothing is deployed anywhere.
