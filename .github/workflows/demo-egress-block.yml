@@ -1,0 +1,22 @@
+name: demo-egress-block
+
+# DEMO (run by hand): harden-runner in block mode. Only github.com is allowed.
+# The first request succeeds; the second goes to a host that is not on the list and is expected to fail.
+on: workflow_dispatch
+
+permissions: {}
+
+jobs:
+  egress:
+    runs-on: ubuntu-latest
+    permissions: {}
+    steps:
+      - uses: step-security/harden-runner@aebdcf6156ab6691adf63218240e476564a1ed4c # v2.23.0
+        with:
+          egress-policy: block
+          allowed-endpoints: >
+            github.com:443
+      - name: Allowed destination
+        run: curl -sS -o /dev/null -w "github.com -> HTTP %{http_code}\n" --max-time 15 https://github.com
+      - name: Destination NOT on the list (should fail)
+        run: curl -sS -o /dev/null -w "example.org -> HTTP %{http_code}\n" --max-time 15 https://example.org
