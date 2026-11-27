@@ -23,3 +23,6 @@ Evidence: `img/run-token-power.png`.
 Not staged (the values are fake). Measured later as a count of long-lived cloud secrets: 3 before, target 0 after OIDC.
 
 Limits: I own every repo involved, so these show mechanisms, not real-world frequency.
+
+## Fix 1 re-run of Demo 2 (pinned)
+After pinning `demo-action` to the benign SHA `0df90fa1...`, the workflow fetched exactly that SHA and printed the original message, even though the tag `v1` still points at the tampered commit.
