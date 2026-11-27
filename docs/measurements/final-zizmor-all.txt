@@ -1,0 +1,12 @@
+ INFO zizmor: 🌈 zizmor v1.33.1
+ WARN audit: zizmor: zizmor is running in offline mode by default; some audits and auto-fixes will not be available. see https://docs.zizmor.sh/usage/#operating-modes for details
+ INFO audit: zizmor: 🌈 completed .\.github\dependabot.yml
+ INFO audit: zizmor: 🌈 completed .\.github\workflows\ci.yml
+ INFO audit: zizmor: 🌈 completed .\.github\workflows\demo-ai-injection.yml
+ INFO audit: zizmor: 🌈 completed .\.github\workflows\demo-egress-block.yml
+ INFO audit: zizmor: 🌈 completed .\.github\workflows\demo-movable-tag.yml
+ INFO audit: zizmor: 🌈 completed .\.github\workflows\demo-oidc-limits.yml
+ INFO audit: zizmor: 🌈 completed .\.github\workflows\demo-token-power.yml
+ INFO audit: zizmor: 🌈 completed .\.github\workflows\pr-greeter.yml
+ INFO audit: zizmor: 🌈 completed .\.github\workflows\zizmor.yml
+No findings to report. Good job! (1 ignored, 34 suppressed)
