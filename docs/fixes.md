@@ -51,3 +51,32 @@ Teardown: after verification I deleted the app registration and resource group (
 Not stopped: a compromised step inside the deploy job can use the token while the job runs; anyone able to run a job in the unprotected `production` environment can log in (approval gate comes later); a too-loose subject rule would undo the protection. Tested with Reader on an empty resource group only.
 
 Bug found in my own script and fixed: the federated credential and role assignment had silently failed on the first run (Windows path to `/tmp`, role assignment by app id too early, errors hidden by `|| true`).
+
+## Tooling layer (no Azure)
+
+### Step 5: zizmor in CI (`.github/workflows/zizmor.yml`)
+Runs on push to main and on pull requests. Proof: PR #9 adds an unpinned action, `write-all`, `pull_request_target` and a template injection; the check failed with 4 reported findings (3 high, 1 medium). PR #9 is not merged. The only exception is an inline `zizmor: ignore[excessive-permissions]` with a reason on the deliberately broad demo job. Whole `.github` folder: 0 findings (1 ignored).
+
+### Step 6: harden-runner (commits "Add harden-runner in audit mode", "Fix 5: ... block mode")
+Audit mode first; the allowlist for block mode came from the StepSecurity insights of the audit runs, per job. `demo-egress-block.yml` (run 45961047266): `github.com` allowed (HTTP 200), `example.org` blocked (connection failed), 1 detection in the insights view. The `deploy` job stays in audit until Azure is re-enabled and its endpoints observed.
+Mistake: the build job's first block-mode run failed because `registry.npmjs.org` was missing from its list (Docker build runs `npm ci`). Fixed in a follow-up commit.
+Limits: a domain allowlist cannot stop exfiltration to an allowed host such as github.com; telemetry goes to StepSecurity.
+
+### Step 7: SBOM, scan, signing (`ci.yml`, build job)
+- SBOM via anchore/sbom-action (spdx-json artifact `sbom.spdx.json`).
+- Vulnerability scan via anchore/scan-action (Grype), report-only (`fail-build: false`).
+- On main: push to GHCR, `cosign sign` (keyless), `cosign attest` of the SBOM, `cosign verify` pinned to this repo's workflow identity. Run 45958220064 shows the verification lines.
+- Base image pinned by digest; Docker added to Dependabot.
+
+Scan (rows = package + advisory pairs, one scan per image on 2026-11-27):
+
+| Image | Critical | High | Medium | Low | Total |
+|---|---|---|---|---|---|
+| node:20-alpine (pinned) | 9 | 91 | 56 | 22 | 178 |
+| node:24-alpine (pinned) | 1 | 24 | 21 | 1 | 47 |
+| + npm/yarn removed, non-root | 1 | 18 | 9 | 0 | 28 |
+
+Files: `measurements/image-scan-1-node20.txt`, `-2-node24.txt`, `-3-pruned.txt`. The remaining 28 rows are all Alpine OS packages (busybox, OpenSSL, zlib). A smoke test starts the pruned image and calls `/health`.
+Bug exposed by the Node 24 move: `node --test test/` fails; changed to `node --test`.
+
+Not stopped: a signature proves which workflow built the image, not that the code is safe; nothing enforces the signature at deploy time; the scan covers known issues only; the signing record is permanent and public (Rekor). The scan does not gate the build, deliberately and visibly.
