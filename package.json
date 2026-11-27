@@ -8,7 +8,7 @@
     "test": "node --test test/"
   },
   "license": "MIT",
-  "engines": { "node": ">=20" },
+  "engines": { "node": ">=24" },
   "dependencies": {
     "express": "^4.21.2"
   }

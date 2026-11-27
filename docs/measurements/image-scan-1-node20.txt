@@ -1,0 +1,179 @@
+NAME                     INSTALLED   FIXED IN                            TYPE    VULNERABILITY        SEVERITY  EPSS          RISK          
+node                     20.20.2     11.0.0, *22.23.4, 24.22.1, 26.12.1  binary  CVE-2026-111497      Critical  33.0% (98th)  97.1   (kev)  
+glob                     10.4.2      10.5.0                              npm     GHSA-5j98-mcp5-4vw2  High      4.5% (92nd)   3.4           
+libcrypto3               3.5.6-r0    3.5.7-r0                            apk     CVE-2026-45447       High      2.2% (82nd)   1.7           
+libssl3                  3.5.6-r0    3.5.7-r0                            apk     CVE-2026-45447       High      2.2% (82nd)   1.7           
+libcrypto3               3.5.6-r0    3.5.8-r0                            apk     CVE-2026-63076       High      1.8% (79th)   1.4           
+libssl3                  3.5.6-r0    3.5.8-r0                            apk     CVE-2026-63076       High      1.8% (79th)   1.4           
+libcrypto3               3.5.6-r0    3.5.8-r0                            apk     CVE-2026-18798       High      1.7% (78th)   1.3           
+libssl3                  3.5.6-r0    3.5.8-r0                            apk     CVE-2026-18798       High      1.7% (78th)   1.3           
+libcrypto3               3.5.6-r0    3.5.8-r0                            apk     CVE-2026-63073       Critical  1.2% (66th)   1.1           
+libssl3                  3.5.6-r0    3.5.8-r0                            apk     CVE-2026-63073       Critical  1.2% (66th)   1.1           
+libcrypto3               3.5.6-r0    3.5.8-r0                            apk     CVE-2026-14457       High      1.4% (71st)   1.0           
+libssl3                  3.5.6-r0    3.5.8-r0                            apk     CVE-2026-14457       High      1.4% (71st)   1.0           
+cross-spawn              7.0.3       7.0.5                               npm     GHSA-3xgq-45jj-v275  High      1.3% (70th)   1.0           
+libcrypto3               3.5.6-r0    3.5.7-r0                            apk     CVE-2026-34180       High      1.3% (70th)   1.0           
+libcrypto3               3.5.6-r0    3.5.8-r0                            apk     CVE-2026-54874       High      1.3% (70th)   1.0           
+libssl3                  3.5.6-r0    3.5.7-r0                            apk     CVE-2026-34180       High      1.3% (70th)   1.0           
+libssl3                  3.5.6-r0    3.5.8-r0                            apk     CVE-2026-54874       High      1.3% (70th)   1.0           
+libcrypto3               3.5.6-r0                                        apk     CVE-2026-84782       High      1.2% (67th)   0.9           
+libssl3                  3.5.6-r0                                        apk     CVE-2026-84782       High      1.2% (67th)   0.9           
+libcrypto3               3.5.6-r0    3.5.8-r0                            apk     CVE-2026-63072       High      1.0% (62nd)   0.8           
+libssl3                  3.5.6-r0    3.5.8-r0                            apk     CVE-2026-63072       High      1.0% (62nd)   0.8           
+libcrypto3               3.5.6-r0    3.5.7-r0                            apk     CVE-2026-9076        High      1.0% (60th)   0.7           
+libssl3                  3.5.6-r0    3.5.7-r0                            apk     CVE-2026-9076        High      1.0% (60th)   0.7           
+brace-expansion          2.0.1       2.1.3                               npm     GHSA-mh99-v99m-4gvg  High      0.8% (55th)   0.6           
+libcrypto3               3.5.6-r0                                        apk     CVE-2026-75806       Medium    1.2% (68th)   0.6           
+libssl3                  3.5.6-r0                                        apk     CVE-2026-75806       Medium    1.2% (68th)   0.6           
+libcrypto3               3.5.6-r0    3.5.7-r0                            apk     CVE-2026-42766       Medium    1.1% (65th)   0.6           
+libssl3                  3.5.6-r0    3.5.7-r0                            apk     CVE-2026-42766       Medium    1.1% (65th)   0.6           
+libcrypto3               3.5.6-r0    3.5.8-r0                            apk     CVE-2026-14456       High      0.8% (52nd)   0.6           
+libssl3                  3.5.6-r0    3.5.8-r0                            apk     CVE-2026-14456       High      0.8% (52nd)   0.6           
+minimatch                9.0.5       9.0.7                               npm     GHSA-7r86-cg39-jmmj  High      0.8% (52nd)   0.6           
+libcrypto3               3.5.6-r0                                        apk     CVE-2026-107494      High      0.8% (52nd)   0.6           
+libcrypto3               3.5.6-r0    3.5.7-r0                            apk     CVE-2026-42764       High      0.8% (52nd)   0.6           
+libcrypto3               3.5.6-r0    3.5.8-r0                            apk     CVE-2026-63075       High      0.8% (52nd)   0.6           
+libssl3                  3.5.6-r0                                        apk     CVE-2026-107494      High      0.8% (52nd)   0.6           
+libssl3                  3.5.6-r0    3.5.7-r0                            apk     CVE-2026-42764       High      0.8% (52nd)   0.6           
+libssl3                  3.5.6-r0    3.5.8-r0                            apk     CVE-2026-63075       High      0.8% (52nd)   0.6           
+libcrypto3               3.5.6-r0                                        apk     CVE-2026-124709      High      0.8% (52nd)   0.6           
+libcrypto3               3.5.6-r0    3.5.7-r0                            apk     CVE-2026-34183       High      0.8% (52nd)   0.6           
+libssl3                  3.5.6-r0                                        apk     CVE-2026-124709      High      0.8% (52nd)   0.6           
+libssl3                  3.5.6-r0    3.5.7-r0                            apk     CVE-2026-34183       High      0.8% (52nd)   0.6           
+tar                      6.2.1       7.5.7                               npm     GHSA-34x7-hfp2-rc4v  High      0.7% (49th)   0.6           
+brace-expansion          2.0.1       2.1.4                               npm     GHSA-rgw5-rvv9-x895  High      0.7% (51st)   0.6           
+tar                      6.2.1       7.5.19                              npm     GHSA-23hp-3jrh-7fpw  Critical  0.6% (45th)   0.6           
+libcrypto3               3.5.6-r0    3.5.7-r0                            apk     CVE-2026-7383        High      0.7% (48th)   0.5           
+libssl3                  3.5.6-r0    3.5.7-r0                            apk     CVE-2026-7383        High      0.7% (48th)   0.5           
+libcrypto3               3.5.6-r0                                        apk     CVE-2026-54873       High      0.7% (49th)   0.5           
+libssl3                  3.5.6-r0                                        apk     CVE-2026-54873       High      0.7% (49th)   0.5           
+minimatch                9.0.5       9.0.6                               npm     GHSA-3ppc-4f35-3m26  High      0.6% (45th)   0.5           
+node                     20.20.2     *22.23.5, 24.22.3, 26.13.1          binary  CVE-2026-123865      High      0.7% (47th)   0.5           
+tar                      6.2.1       7.5.18                              npm     GHSA-8x88-c5mf-7j5w  High      0.6% (45th)   0.5           
+pacote                   18.0.6      21.5.1                              npm     GHSA-w4pp-8pjf-rmxw  High      0.6% (44th)   0.5           
+brace-expansion          2.0.1       2.1.5                               npm     GHSA-6j4f-fj2g-mc7p  High      0.6% (44th)   0.5           
+brace-expansion          2.0.1       2.1.6                               npm     GHSA-qhr7-859c-m2p7  High      0.6% (44th)   0.5           
+zlib                     1.3.2-r0    1.3.2-r1                            apk     CVE-2026-85091       High      0.6% (42nd)   0.5           
+libcrypto3               3.5.6-r0                                        apk     CVE-2026-84784       High      0.6% (43rd)   0.5           
+libssl3                  3.5.6-r0                                        apk     CVE-2026-84784       High      0.6% (43rd)   0.5           
+minimatch                9.0.5       9.0.7                               npm     GHSA-23c5-xmqv-rm74  High      0.6% (42nd)   0.5           
+node                     20.20.2     *22.23.5, 24.22.3, 26.13.1          binary  CVE-2026-123866      High      0.6% (42nd)   0.4           
+musl                     1.2.5-r23   1.2.5-r24                           apk     CVE-2026-107891      High      0.6% (40th)   0.4           
+musl-utils               1.2.5-r23   1.2.5-r24                           apk     CVE-2026-107891      High      0.6% (40th)   0.4           
+brace-expansion          2.0.1       2.0.3                               npm     GHSA-f886-m6hf-6m8v  Medium    0.7% (50th)   0.4           
+tar                      6.2.1       7.5.21                              npm     GHSA-r292-9mhp-454m  High      0.5% (38th)   0.4           
+node                     20.20.2     *22.23.2, 24.18.1, 26.5.1           binary  CVE-2026-56848       High      0.5% (37th)   0.4           
+node                     20.20.2     *22.23.2, 24.18.1                   binary  CVE-2026-56846       High      0.5% (37th)   0.4           
+node                     20.20.2     *22.23.0, 24.17.0                   binary  CVE-2026-48937       High      0.5% (39th)   0.4           
+libcrypto3               3.5.6-r0                                        apk     CVE-2026-121482      High      0.5% (35th)   0.4           
+libcrypto3               3.5.6-r0                                        apk     CVE-2026-84786       High      0.5% (35th)   0.4           
+libssl3                  3.5.6-r0                                        apk     CVE-2026-121482      High      0.5% (35th)   0.4           
+libssl3                  3.5.6-r0                                        apk     CVE-2026-84786       High      0.5% (35th)   0.4           
+ip-address               9.0.5       10.3.1                              npm     GHSA-mwp4-54f8-5fhr  High      0.5% (33rd)   0.4           
+tar                      6.2.1       7.5.10                              npm     GHSA-qffp-2rhf-9h96  High      0.5% (31st)   0.4           
+zlib                     1.3.2-r0    1.4-r0                              apk     CVE-2026-4738        Critical  0.4% (23rd)   0.3           
+glob                     10.4.2      14.0.2                              npm     GHSA-3g3m-2fjr-6pw4  Medium    0.6% (43rd)   0.3           
+node                     20.20.2     *22.23.5, 24.22.3, 26.13.1          binary  CVE-2026-123872      High      0.4% (29th)   0.3           
+libcrypto3               3.5.6-r0    3.5.9-r1                            apk     CVE-2026-95692       High      0.4% (30th)   0.3           
+libssl3                  3.5.6-r0    3.5.9-r1                            apk     CVE-2026-95692       High      0.4% (30th)   0.3           
+tar                      6.2.1       7.5.18                              npm     GHSA-w8wr-v893-vjvp  Medium    0.6% (45th)   0.3           
+tar                      6.2.1       7.5.3                               npm     GHSA-8qq5-rm4j-mr97  High      0.4% (28th)   0.3           
+node                     20.20.2     *22.23.5, 24.22.3, 26.13.1          binary  CVE-2026-123864      High      0.4% (26th)   0.3           
+node                     20.20.2     *22.23.5, 24.22.3, 26.13.1          binary  CVE-2026-123875      Medium    0.6% (41st)   0.3           
+minimatch                9.0.5       11.0.1                              npm     GHSA-g3hv-75wg-m249  Medium    0.5% (37th)   0.3           
+brace-expansion          2.0.1       2.1.2                               npm     GHSA-3jxr-9vmj-r5cp  High      0.4% (30th)   0.3           
+libcrypto3               3.5.6-r0    3.5.8-r0                            apk     CVE-2026-63074       Medium    0.6% (40th)   0.3           
+libssl3                  3.5.6-r0    3.5.8-r0                            apk     CVE-2026-63074       Medium    0.6% (40th)   0.3           
+libcrypto3               3.5.6-r0    3.5.9-r1                            apk     CVE-2026-107496      High      0.4% (25th)   0.3           
+libssl3                  3.5.6-r0    3.5.9-r1                            apk     CVE-2026-107496      High      0.4% (25th)   0.3           
+libcrypto3               3.5.6-r0                                        apk     CVE-2026-72897       High      0.4% (25th)   0.3           
+libssl3                  3.5.6-r0                                        apk     CVE-2026-72897       High      0.4% (25th)   0.3           
+libcrypto3               3.5.6-r0    3.5.7-r0                            apk     CVE-2026-45445       High      0.4% (25th)   0.3           
+libssl3                  3.5.6-r0    3.5.7-r0                            apk     CVE-2026-45445       High      0.4% (25th)   0.3           
+ip-address               9.0.5       10.7.1                              npm     GHSA-h3mg-xc3c-68pw  Medium    0.5% (37th)   0.3           
+ip-address               9.0.5       10.5.1                              npm     GHSA-rpw4-54j3-4h4q  Medium    0.5% (36th)   0.3           
+ip-address               9.0.5       10.7.1                              npm     GHSA-j6r3-76f7-8jcv  Medium    0.5% (36th)   0.3           
+busybox                  1.37.0-r30                                      apk     CVE-2025-60876       Medium    0.5% (34th)   0.3           
+busybox-binsh            1.37.0-r30                                      apk     CVE-2025-60876       Medium    0.5% (34th)   0.3           
+ssl_client               1.37.0-r30                                      apk     CVE-2025-60876       Medium    0.5% (34th)   0.3           
+postcss-selector-parser  6.1.0       6.1.5                               npm     GHSA-rj75-hqrm-r3gf  Medium    0.5% (37th)   0.3           
+libcrypto3               3.5.6-r0                                        apk     CVE-2026-75804       Medium    0.5% (38th)   0.3           
+libssl3                  3.5.6-r0                                        apk     CVE-2026-75804       Medium    0.5% (38th)   0.3           
+node                     20.20.2     *22.23.4, 24.22.1, 26.12.1          binary  CVE-2026-105482      High      0.4% (22nd)   0.3           
+brace-expansion          2.0.1       2.1.7                               npm     GHSA-q2hr-2g5m-vwhr  Medium    0.5% (37th)   0.3           
+ip-address               9.0.5       10.1.1                              npm     GHSA-v2v4-37r5-5v8g  Medium    0.5% (36th)   0.3           
+tar                      6.2.1       7.5.17                              npm     GHSA-gvwx-54wh-qm9j  Medium    0.5% (36th)   0.3           
+libcrypto3               3.5.6-r0                                        apk     CVE-2026-42772       Medium    0.5% (34th)   0.3           
+libssl3                  3.5.6-r0                                        apk     CVE-2026-42772       Medium    0.5% (34th)   0.3           
+libcrypto3               3.5.6-r0                                        apk     CVE-2026-35191       Low       0.7% (50th)   0.2           
+libssl3                  3.5.6-r0                                        apk     CVE-2026-35191       Low       0.7% (50th)   0.2           
+diff                     5.2.0       5.2.2                               npm     GHSA-73rr-hh4g-fpgx  Low       0.9% (55th)   0.2           
+ip-address               9.0.5       10.7.4                              npm     GHSA-rxp7-6hxx-x8q5  Medium    0.4% (28th)   0.2           
+libcrypto3               3.5.6-r0    3.5.7-r0                            apk     CVE-2026-42767       Medium    0.4% (28th)   0.2           
+libssl3                  3.5.6-r0    3.5.7-r0                            apk     CVE-2026-42767       Medium    0.4% (28th)   0.2           
+node                     20.20.2     *22.23.2, 24.18.1, 26.5.1           binary  CVE-2026-58042       Medium    0.4% (27th)   0.2           
+libcrypto3               3.5.6-r0    3.5.9-r1                            apk     CVE-2026-95691       High      0.3% (13th)   0.2           
+libssl3                  3.5.6-r0    3.5.9-r1                            apk     CVE-2026-95691       High      0.3% (13th)   0.2           
+tar                      6.2.1       7.5.4                               npm     GHSA-r6q2-hw4h-h46w  High      0.3% (11th)   0.2           
+libcrypto3               3.5.6-r0    3.5.9-r1                            apk     CVE-2026-88823       High      0.3% (11th)   0.2           
+libssl3                  3.5.6-r0    3.5.9-r1                            apk     CVE-2026-88823       High      0.3% (11th)   0.2           
+libcrypto3               3.5.6-r0    3.5.8-r0                            apk     CVE-2026-75803       Critical  0.2% (7th)    0.2           
+libssl3                  3.5.6-r0    3.5.8-r0                            apk     CVE-2026-75803       Critical  0.2% (7th)    0.2           
+brace-expansion          2.0.1       2.0.2                               npm     GHSA-v6h2-p8h4-qcjw  Low       0.8% (51st)   0.2           
+libcrypto3               3.5.6-r0                                        apk     CVE-2026-35189       Medium    0.4% (23rd)   0.2           
+libssl3                  3.5.6-r0                                        apk     CVE-2026-35189       Medium    0.4% (23rd)   0.2           
+libcrypto3               3.5.6-r0                                        apk     CVE-2026-75805       Medium    0.4% (22nd)   0.2           
+libssl3                  3.5.6-r0                                        apk     CVE-2026-75805       Medium    0.4% (22nd)   0.2           
+libcrypto3               3.5.6-r0    3.5.7-r0                            apk     CVE-2026-34182       Critical  0.2% (5th)    0.2           
+libssl3                  3.5.6-r0    3.5.7-r0                            apk     CVE-2026-34182       Critical  0.2% (5th)    0.2           
+node                     20.20.2     *22.23.4, 24.22.1, 26.12.1          binary  CVE-2026-106072      Medium    0.3% (16th)   0.2           
+tar                      6.2.1       7.5.8                               npm     GHSA-83g3-92jg-28cx  High      0.2% (9th)    0.2           
+postcss-selector-parser  6.1.0       6.1.3                               npm     GHSA-w9m9-85wc-3x92  Low       0.6% (41st)   0.2           
+node                     20.20.2     *22.23.4, 24.22.1, 26.12.1          binary  CVE-2026-106069      High      0.2% (9th)    0.2           
+node                     20.20.2     *22.23.2, 24.18.1, 26.5.1           binary  CVE-2026-58040       Medium    0.3% (15th)   0.2           
+node                     20.20.2     *22.23.5, 24.22.3, 26.13.1          binary  CVE-2026-123877      Medium    0.3% (13th)   0.2           
+tar                      6.2.1       7.5.11                              npm     GHSA-9ppj-qmqm-q256  High      0.2% (6th)    0.2           
+libcrypto3               3.5.6-r0                                        apk     CVE-2026-95690       Medium    0.3% (17th)   0.2           
+libssl3                  3.5.6-r0                                        apk     CVE-2026-95690       Medium    0.3% (17th)   0.2           
+libcrypto3               3.5.6-r0                                        apk     CVE-2026-54875       Low       0.5% (34th)   0.2           
+libssl3                  3.5.6-r0                                        apk     CVE-2026-54875       Low       0.5% (34th)   0.2           
+libcrypto3               3.5.6-r0                                        apk     CVE-2026-54872       Low       0.5% (34th)   0.2           
+libssl3                  3.5.6-r0                                        apk     CVE-2026-54872       Low       0.5% (34th)   0.2           
+node                     20.20.2     *22.23.0, 24.17.0, 26.3.1           binary  CVE-2026-48617       High      0.3% (10th)   0.2           
+libcrypto3               3.5.6-r0    3.5.9-r1                            apk     CVE-2026-88822       Medium    0.3% (10th)   0.1           
+libssl3                  3.5.6-r0    3.5.9-r1                            apk     CVE-2026-88822       Medium    0.3% (10th)   0.1           
+libcrypto3               3.5.6-r0                                        apk     CVE-2026-77696       Low       0.4% (30th)   0.1           
+libssl3                  3.5.6-r0                                        apk     CVE-2026-77696       Low       0.4% (30th)   0.1           
+node                     20.20.2     *22.23.2, 24.18.1, 26.5.1           binary  CVE-2026-58041       Medium    0.3% (13th)   0.1           
+sigstore                 2.3.1       4.1.1                               npm     GHSA-52v5-jr5w-gjxr  High      0.2% (4th)    0.1           
+@sigstore/core           1.1.0       3.2.1                               npm     GHSA-jfc7-64v2-mr8c  Medium    0.3% (11th)   0.1           
+libcrypto3               3.5.6-r0                                        apk     CVE-2026-35190       Medium    0.3% (11th)   0.1           
+libssl3                  3.5.6-r0                                        apk     CVE-2026-35190       Medium    0.3% (11th)   0.1           
+libcrypto3               3.5.6-r0    3.5.7-r0                            apk     CVE-2026-34181       High      0.2% (4th)    0.1           
+libssl3                  3.5.6-r0    3.5.7-r0                            apk     CVE-2026-34181       High      0.2% (4th)    0.1           
+node                     20.20.2     *22.23.4, 24.22.1, 26.12.1          binary  CVE-2026-105481      Medium    0.2% (7th)    0.1           
+libcrypto3               3.5.6-r0    3.5.7-r0                            apk     CVE-2026-42769       Medium    0.2% (8th)    0.1           
+libssl3                  3.5.6-r0    3.5.7-r0                            apk     CVE-2026-42769       Medium    0.2% (8th)    0.1           
+node                     20.20.2     *22.23.0, 24.17.0, 26.3.1           binary  CVE-2026-48931       Low       0.4% (22nd)   0.1           
+node                     20.20.2     *22.23.5, 24.22.3, 26.13.1          binary  CVE-2026-123871      Medium    0.2% (7th)    0.1           
+node                     20.20.2     *22.23.4, 24.22.1, 26.12.1          binary  CVE-2026-106074      Medium    0.2% (8th)    0.1           
+libcrypto3               3.5.6-r0    3.5.7-r0                            apk     CVE-2026-45446       Medium    0.2% (8th)    0.1           
+libssl3                  3.5.6-r0    3.5.7-r0                            apk     CVE-2026-45446       Medium    0.2% (8th)    0.1           
+libcrypto3               3.5.6-r0                                        apk     CVE-2026-107493      High      0.1% (2nd)    0.1           
+libssl3                  3.5.6-r0                                        apk     CVE-2026-107493      High      0.1% (2nd)    0.1           
+libcrypto3               3.5.6-r0    3.5.7-r0                            apk     CVE-2026-42768       Low       0.3% (14th)   < 0.1         
+libssl3                  3.5.6-r0    3.5.7-r0                            apk     CVE-2026-42768       Low       0.3% (14th)   < 0.1         
+node                     20.20.2     *22.23.2, 24.18.1, 26.5.1           binary  CVE-2026-58043       High      0.1% (1st)    < 0.1         
+node                     20.20.2     *22.23.2, 24.18.1, 26.5.1           binary  CVE-2026-58045       Medium    0.2% (3rd)    < 0.1         
+tar                      6.2.1       7.5.16                              npm     GHSA-vmf3-w455-68vh  Medium    0.2% (2nd)    < 0.1         
+node                     20.20.2                                         binary  CVE-2026-48932       Low       0.3% (12th)   < 0.1         
+node                     20.20.2     *22.23.2, 24.18.1, 26.5.1           binary  CVE-2026-58044       Low       0.3% (12th)   < 0.1         
+libcrypto3               3.5.6-r0    3.5.7-r0                            apk     CVE-2026-42770       Low       0.3% (10th)   < 0.1         
+libssl3                  3.5.6-r0    3.5.7-r0                            apk     CVE-2026-42770       Low       0.3% (10th)   < 0.1         
+node                     20.20.2     *22.23.5, 24.22.3, 26.13.1          binary  CVE-2026-123867      Medium    0.2% (4th)    < 0.1         
+node                     20.20.2     *22.23.2, 24.18.1, 26.5.1           binary  CVE-2026-56847       Medium    0.2% (2nd)    < 0.1         
+node                     20.20.2     *22.23.5, 24.22.3, 26.13.1          binary  CVE-2026-123862      Low       0.2% (4th)    < 0.1         
+node                     20.20.2     *22.23.2, 24.18.1, 26.5.1           binary  CVE-2026-58039       Low       0.1% (2nd)    < 0.1         
+node                     20.20.2     *22.23.5, 24.22.3, 26.13.1          binary  CVE-2026-123829      Low       0.2% (2nd)    < 0.1         
+node                     20.20.2     *22.23.4, 24.22.1, 26.12.1          binary  CVE-2026-106073      Low       0.1% (1st)    < 0.1         
+node                     20.20.2     *22.23.2, 24.18.1, 26.5.1           binary  CVE-2026-56850       Medium    < 0.1% (0th)  < 0.1         
