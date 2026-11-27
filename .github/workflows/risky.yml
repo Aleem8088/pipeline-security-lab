@@ -1,9 +1,0 @@
-name: risky-example
-on: pull_request_target
-permissions: write-all
-jobs:
-  x:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - run: echo "${{ github.event.pull_request.title }}"
