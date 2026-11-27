@@ -2,7 +2,7 @@ name: ci
 
 on: [push, pull_request]
 
-# PARTLY HARDENED (see docs/fixes.md). Still weak on purpose: the static secret in the deploy job.
+# PARTLY HARDENED (see docs/fixes.md). Fix 4 replaced the static cloud secret with OIDC.
 # Fix 2: no permissions by default; each job asks for only what it needs.
 permissions: {}
 
@@ -40,17 +40,21 @@ jobs:
 
   deploy:
     needs: build
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main' && vars.AZURE_DEPLOY == 'true'
     runs-on: ubuntu-latest
-    permissions: {}   # this job only runs a script; it needs no repo access at all
+    environment: production
+    permissions:
+      id-token: write   # lets this job ask GitHub for a short-lived identity token; it grants no repo access
     steps:
-      # Weakness (d): a long-lived cloud credential stored as a repo secret.
-      # The value here is a harmless dummy; nothing is deployed anywhere.
-      - name: Pretend deploy with a static service-principal secret
-        env:
-          AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
-          AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
-          AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+      # Fix 4: no stored password. The job proves who it is with a short-lived OIDC token, and
+      # Azure only accepts it for this repo's "production" environment (see infra/setup-azure-oidc.sh).
+      # The three values below are identifiers, not credentials.
+      - uses: azure/login@7184910d9eb2b1c5e48f7073824a90609bb9b6d6 # v2.3.1
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID_OIDC }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID_OIDC }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      - name: Prove the login worked (read-only)
         run: |
-          echo "would run: az login --service-principal -u $AZURE_CLIENT_ID ..."
-          echo "static secret present: $([ -n "$AZURE_CLIENT_SECRET" ] && echo yes || echo no)"
+          az account show --query "{signedInAs:user.type}" -o json
+          az group show --name rg-pipeline-lab --query "{resourceGroup:name, location:location}" -o json
