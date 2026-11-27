@@ -80,3 +80,24 @@ Files: `measurements/image-scan-1-node20.txt`, `-2-node24.txt`, `-3-pruned.txt`.
 Bug exposed by the Node 24 move: `node --test test/` fails; changed to `node --test`.
 
 Not stopped: a signature proves which workflow built the image, not that the code is safe; nothing enforces the signature at deploy time; the scan covers known issues only; the signing record is permanent and public (Rekor). The scan does not gate the build, deliberately and visibly.
+
+## Step 8: branch protection and the production approval gate
+
+Configuration (as finally applied):
+- Environment `production`: required reviewer (Aleem8088), deployments only from `main`, self-review not prevented (solo repo).
+- Branch protection on `main`: pull request required, required checks `test`, `build`, `zizmor` (strict/up to date), 0 required approvals, no force pushes, no deletions, conversation resolution required, **enforce for administrators: on**.
+- `.github/CODEOWNERS`: `.github/`, `Dockerfile`, `infra/` owned by the repo owner (not enforced: code-owner review is off because a solo maintainer cannot approve their own PR).
+- Deploy job: harden-runner block mode, allowlist `github.com`, `login.microsoftonline.com`, `management.azure.com`, `azcliprod.blob.core.windows.net`.
+
+Evidence:
+- Gate: run 45963196215 stopped at "production require an approval to start deploying changes" (screenshot `img/gate1-waiting.png`); approved by the owner; deploy logged in via OIDC. Second approved deploy (run 45963884859) ran in block mode and succeeded.
+- Branch policy: a run from branch `demo/zizmor-gate` was refused: "Branch "demo/zizmor-gate" is not allowed to deploy to production due to environment protection rules." (`img/gate3-branch-refused.png`, run 45962712126).
+- Enforcement as admin: direct push to `main` rejected ("protected branch hook declined"); harmless test PR #12 (unpinned action, zizmor fails): `gh pr merge` refused ("base branch policy prohibits the merge") and `gh pr merge --admin` refused ("2 of 3 required status checks are failing"). Closed unmerged.
+
+Incident (disclosed): with "enforce for administrators" off, a test `gh pr merge 9` merged the deliberately risky PR #9, putting `risky.yml` (`pull_request_target`, `write-all`, template injection) on `main` for about 41 seconds (merge commit 5f7ae2e, removed in ddf88a7). No pull request was opened in that window and the workflow never ran. The CI run triggered by the merge commit was cancelled before deploying. Two "Test: direct push ... [skip ci]" commits (admin bypass) also remain in history. Fix: enforce for administrators.
+
+Second allowlist miss: on a PR run the `build` job failed because Docker Hub redirected the builder-image download to `docker-images-prod.s3.dualstack.us-east-1.amazonaws.com`, which the audit run had not seen. Added in PR #13 (merged through the protected flow).
+
+Teardown: Azure app registration and resource group deleted and verified absent; Azure secrets deleted; `AZURE_DEPLOY=false`.
+
+Not stopped / not tested: no second human reviewer (required approvals are 0); force-push and branch-deletion blocking are configured but untested; nothing alerts if an admin disables the protection; a mistaken approval still approves.
