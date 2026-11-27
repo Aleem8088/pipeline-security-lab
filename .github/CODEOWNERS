@@ -1,0 +1,4 @@
+# Changes to anything that controls the build, the image or the cloud trust need the owner's review.
+/.github/        @Aleem8088
+/Dockerfile      @Aleem8088
+/infra/          @Aleem8088
