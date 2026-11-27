@@ -18,3 +18,4 @@ With `--persona auditor` (more false positives allowed) zizmor reports 21.
 Files: `before-zizmor.txt`, `before-zizmor.json`.
 
 Note: zizmor does not flag the static cloud secret as a finding. That weakness is measured differently (see later write-up): by listing which long-lived secrets exist in the repo.
+
