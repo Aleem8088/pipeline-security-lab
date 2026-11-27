@@ -114,7 +114,12 @@ jobs:
     steps:
       - uses: step-security/harden-runner@aebdcf6156ab6691adf63218240e476564a1ed4c # v2.23.0
         with:
-          egress-policy: audit   # stays in audit until this job is re-enabled and its endpoints observed
+          egress-policy: block   # allowlist taken from an audit-mode deploy run (Azure login + read)
+          allowed-endpoints: >
+            github.com:443
+            login.microsoftonline.com:443
+            management.azure.com:443
+            azcliprod.blob.core.windows.net:443
       # Fix 4: no stored password. The job proves who it is with a short-lived OIDC token, and
       # Azure only accepts it for this repo's "production" environment (see infra/setup-azure-oidc.sh).
       # The three values below are identifiers, not credentials.
