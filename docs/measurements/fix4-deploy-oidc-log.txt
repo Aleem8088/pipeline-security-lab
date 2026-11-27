@@ -1,0 +1,15 @@
+Federated token details:
+ issuer - https://token.actions.githubusercontent.com
+ subject claim - repo:Aleem8088@81855733/pipeline-security-lab@1474047816:environment:production
+ audience - api://AzureADTokenExchange
+ job_workflow_ref - Aleem8088/pipeline-security-lab/.github/workflows/ci.yml@refs/heads/main
+Attempting Azure CLI login by using OIDC...
+Subscription is set successfully.
+Azure CLI login succeeds by using OIDC.
+{
+  "signedInAs": "servicePrincipal"
+}
+{
+  "location": "centralindia",
+  "resourceGroup": "rg-pipeline-lab"
+}

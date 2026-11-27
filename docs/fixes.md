@@ -38,3 +38,16 @@ Proof: the identical crafted title replayed.
 zizmor (same scope): 2 to 0 findings. Output: `measurements/after-fix3-zizmor.txt`.
 
 Not covered: other untrusted-text flows (action inputs, files read at runtime, AI steps); fork PRs not tested; "0 findings" excludes the stored static secret in the deploy job and the intentionally weak demo workflows.
+
+## Fix 4: Azure OIDC instead of a stored client secret (commit 8d46445)
+- `infra/setup-azure-oidc.sh` creates: empty resource group, app registration + service principal, a federated credential trusting only `repo:Aleem8088@<ownerId>/pipeline-security-lab@<repoId>:environment:production`, and the Reader role on that resource group. `infra/teardown-azure-oidc.sh` removes it.
+- The `deploy` job uses `azure/login@<sha> # v2.3.1` with `permissions: id-token: write` and `environment: production`. Run 45956627317: "Azure CLI login succeeds by using OIDC", signed in as a service principal, read the resource group. Log excerpt: `measurements/fix4-deploy-oidc-log.txt`.
+- Negative tests (`demo-oidc-limits.yml`, run 45956826233), both expected to fail: (1) no environment, so subject `...:ref:refs/heads/main` was refused with AADSTS700213; (2) right environment but Reader role, so a write was refused with AuthorizationFailed.
+- Stored long-lived cloud credentials: 1 (dummy client secret) to 0. Three Azure identifiers are kept as masked secrets; they are not credentials.
+- zizmor on the scored files: still 0.
+
+Teardown: after verification I deleted the app registration and resource group (verified none left), deleted the Azure secrets, and set the repo variable `AZURE_DEPLOY=false`, which makes the deploy job skip. To re-enable: run the setup script, store the three IDs it prints, set `AZURE_DEPLOY=true`.
+
+Not stopped: a compromised step inside the deploy job can use the token while the job runs; anyone able to run a job in the unprotected `production` environment can log in (approval gate comes later); a too-loose subject rule would undo the protection. Tested with Reader on an empty resource group only.
+
+Bug found in my own script and fixed: the federated credential and role assignment had silently failed on the first run (Windows path to `/tmp`, role assignment by app id too early, errors hidden by `|| true`).
