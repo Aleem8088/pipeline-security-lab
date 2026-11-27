@@ -62,6 +62,11 @@ jobs:
           fail-build: false
           severity-cutoff: high
           output-format: table
+      - name: Smoke test the image (does the pruned image still start?)
+        run: |
+          docker run -d --name app -p 3000:3000 "$IMAGE:$GITHUB_SHA"
+          for i in $(seq 1 15); do curl -fsS http://127.0.0.1:3000/health && exit 0; sleep 1; done
+          docker logs app; exit 1
       # Fix 6c: on main only, push and sign the image (keyless, using the job's OIDC identity).
       - uses: sigstore/cosign-installer@881c63bd87e38389154debd8331404ce7ca8a3ab # v4.1.4
         if: github.ref == 'refs/heads/main'
