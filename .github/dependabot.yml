@@ -1,0 +1,17 @@
+version: 2
+updates:
+  # Keeps the pinned action SHAs current by opening reviewable pull requests.
+  # cooldown: wait 7 days after a new release before proposing it, so a freshly
+  # published (possibly malicious) release is less likely to be adopted instantly.
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    cooldown:
+      default-days: 7
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    cooldown:
+      default-days: 7

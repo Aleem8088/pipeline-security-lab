@@ -11,4 +11,4 @@ jobs:
   run-action:
     runs-on: ubuntu-latest
     steps:
-      - uses: Aleem8088/demo-action@v1
+      - uses: Aleem8088/demo-action@0df90fa1f2bb56e8e194638329e9b05438270bd3 # the benign commit that v1 originally pointed to

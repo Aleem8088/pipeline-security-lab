@@ -1,0 +1,319 @@
+[
+  {
+    "ident": "excessive-permissions",
+    "desc": "overly broad permissions",
+    "url": "https://docs.zizmor.sh/audits/#excessive-permissions",
+    "determinations": {
+      "confidence": "High",
+      "severity": "High",
+      "persona": "Regular"
+    },
+    "locations": [
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/ci.yml"
+            }
+          },
+          "annotation": "uses write-all permissions",
+          "route": {
+            "route": [
+              {
+                "Key": "permissions"
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Primary"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 6,
+              "column": 0
+            },
+            "end_point": {
+              "row": 6,
+              "column": 22
+            },
+            "offset_span": {
+              "start": 158,
+              "end": 180
+            }
+          },
+          "feature": "permissions: write-all",
+          "comments": []
+        }
+      }
+    ],
+    "ignored": false,
+    "fixes": []
+  },
+  {
+    "ident": "dangerous-triggers",
+    "desc": "use of fundamentally insecure workflow trigger",
+    "url": "https://docs.zizmor.sh/audits/#dangerous-triggers",
+    "determinations": {
+      "confidence": "Medium",
+      "severity": "High",
+      "persona": "Regular"
+    },
+    "locations": [
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/pr-greeter.yml"
+            }
+          },
+          "annotation": "this workflow",
+          "route": {
+            "route": [
+              {
+                "Key": "on"
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Hidden"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 4,
+              "column": 0
+            },
+            "end_point": {
+              "row": 6,
+              "column": 27
+            },
+            "offset_span": {
+              "start": 157,
+              "end": 211
+            }
+          },
+          "feature": "on:\n  pull_request_target:\n    types: [opened, edited]",
+          "comments": []
+        }
+      },
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/pr-greeter.yml"
+            }
+          },
+          "annotation": "pull_request_target is almost always used insecurely",
+          "route": {
+            "route": [
+              {
+                "Key": "on"
+              },
+              {
+                "Key": "pull_request_target"
+              }
+            ]
+          },
+          "feature_kind": "KeyOnly",
+          "kind": "Primary"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 5,
+              "column": 2
+            },
+            "end_point": {
+              "row": 5,
+              "column": 21
+            },
+            "offset_span": {
+              "start": 163,
+              "end": 182
+            }
+          },
+          "feature": "pull_request_target",
+          "comments": []
+        }
+      }
+    ],
+    "ignored": false,
+    "fixes": []
+  },
+  {
+    "ident": "template-injection",
+    "desc": "code injection via template expansion",
+    "url": "https://docs.zizmor.sh/audits/#template-injection",
+    "determinations": {
+      "confidence": "High",
+      "severity": "High",
+      "persona": "Regular"
+    },
+    "locations": [
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/pr-greeter.yml"
+            }
+          },
+          "annotation": "this step",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "greet"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 0
+              }
+            ]
+          },
+          "feature_kind": "Normal",
+          "kind": "Hidden"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 17,
+              "column": 8
+            },
+            "end_point": {
+              "row": 22,
+              "column": 0
+            },
+            "offset_span": {
+              "start": 535,
+              "end": 721
+            }
+          },
+          "feature": "name: Say thanks\n        env:\n          DEMO_API_TOKEN: ${{ secrets.DEMO_API_TOKEN }}\n        run: |\n          echo \"Thanks for the pull request: ${{ github.event.pull_request.title }}\"\n",
+          "comments": []
+        }
+      },
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/pr-greeter.yml"
+            }
+          },
+          "annotation": "may expand into attacker-controllable code",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "greet"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 0
+              },
+              {
+                "Key": "run"
+              }
+            ]
+          },
+          "feature_kind": {
+            "Subfeature": {
+              "after": 36,
+              "fragment": {
+                "Raw": "github.event.pull_request.title"
+              }
+            }
+          },
+          "kind": "Primary"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 21,
+              "column": 49
+            },
+            "end_point": {
+              "row": 21,
+              "column": 80
+            },
+            "offset_span": {
+              "start": 685,
+              "end": 716
+            }
+          },
+          "feature": "|\n          echo \"Thanks for the pull request: ${{ github.event.pull_request.title }}\"\n",
+          "comments": []
+        }
+      },
+      {
+        "symbolic": {
+          "key": {
+            "Local": {
+              "verbatim_path": ".github/workflows/pr-greeter.yml"
+            }
+          },
+          "annotation": "this run block",
+          "route": {
+            "route": [
+              {
+                "Key": "jobs"
+              },
+              {
+                "Key": "greet"
+              },
+              {
+                "Key": "steps"
+              },
+              {
+                "Index": 0
+              },
+              {
+                "Key": "run"
+              }
+            ]
+          },
+          "feature_kind": "KeyOnly",
+          "kind": "Related"
+        },
+        "concrete": {
+          "location": {
+            "start_point": {
+              "row": 20,
+              "column": 8
+            },
+            "end_point": {
+              "row": 20,
+              "column": 11
+            },
+            "offset_span": {
+              "start": 629,
+              "end": 632
+            }
+          },
+          "feature": "run",
+          "comments": []
+        }
+      }
+    ],
+    "ignored": false,
+    "fixes": [
+      {
+        "title": "replace expression with environment variable",
+        "key": {
+          "Local": {
+            "verbatim_path": ".github/workflows/pr-greeter.yml"
+          }
+        },
+        "disposition": "unsafe"
+      }
+    ]
+  }
+]
