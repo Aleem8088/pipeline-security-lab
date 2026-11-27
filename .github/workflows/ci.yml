@@ -29,6 +29,10 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+      packages: write   # push the image to GHCR (main branch only)
+      id-token: write   # keyless image signing with Sigstore (main branch only)
+    env:
+      IMAGE: ghcr.io/aleem8088/pipeline-security-lab
     steps:
       - uses: step-security/harden-runner@aebdcf6156ab6691adf63218240e476564a1ed4c # v2.23.0
         with:
@@ -41,8 +45,38 @@ jobs:
       - uses: docker/build-push-action@ca052bb54ab0790a636c9b5f226502c73d547a25 # v5.4.0
         with:
           context: .
+          load: true      # keep the image local until it has been scanned
           push: false
-          tags: pipeline-security-lab:${{ github.sha }}
+          tags: ghcr.io/aleem8088/pipeline-security-lab:${{ github.sha }}
+      # Fix 6a: SBOM (a list of everything inside the image), kept as a build artifact.
+      - uses: anchore/sbom-action@dfcb83b97731532d72be422cbc51ee64adb6fd56 # v0.24.4
+        with:
+          image: ghcr.io/aleem8088/pipeline-security-lab:${{ github.sha }}
+          format: spdx-json
+          output-file: sbom.spdx.json
+          artifact-name: sbom.spdx.json
+      # Fix 6b: scan the image for known vulnerabilities. Reports only for now; see docs/fixes.md.
+      - uses: anchore/scan-action@11983a512817154c80a9db660c1a184be7513ed6 # v7.4.3
+        with:
+          image: ghcr.io/aleem8088/pipeline-security-lab:${{ github.sha }}
+          fail-build: false
+          severity-cutoff: high
+          output-format: table
+      # Fix 6c: on main only, push and sign the image (keyless, using the job's OIDC identity).
+      - uses: sigstore/cosign-installer@881c63bd87e38389154debd8331404ce7ca8a3ab # v4.1.4
+        if: github.ref == 'refs/heads/main'
+      - name: Push, sign, attest and verify
+        if: github.ref == 'refs/heads/main'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          echo "$GH_TOKEN" | docker login ghcr.io -u "$GITHUB_ACTOR" --password-stdin
+          docker push "$IMAGE:$GITHUB_SHA"
+          REF=$(docker inspect --format '{{index .RepoDigests 0}}' "$IMAGE:$GITHUB_SHA")
+          echo "signing $REF"
+          cosign sign --yes "$REF"
+          cosign attest --yes --predicate sbom.spdx.json --type spdxjson "$REF"
+          cosign verify "$REF"             --certificate-identity-regexp '^https://github.com/Aleem8088/pipeline-security-lab/'             --certificate-oidc-issuer https://token.actions.githubusercontent.com
 
   deploy:
     needs: build
