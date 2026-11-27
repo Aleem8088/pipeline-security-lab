@@ -1,0 +1,8 @@
+##[group]Run echo "Thanks for the pull request: $PR_TITLE"
+echo "Thanks for the pull request: $PR_TITLE"
+shell: /usr/bin/bash -e {0}
+env:
+  PR_TITLE: hi"; echo "$DEMO_API_TOKEN" | base64; echo "
+  DEMO_API_TOKEN: ***
+##[endgroup]
+Thanks for the pull request: hi"; echo "$DEMO_API_TOKEN" | base64; echo "

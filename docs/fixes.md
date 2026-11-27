@@ -25,3 +25,16 @@ Open follow-up: Dependabot opened major-version bumps (checkout 4 to 7, build-pu
 - zizmor (same scope): 3 to 2 findings (`excessive-permissions` gone). Output: `measurements/after-fix2-zizmor.txt`.
 
 Not stopped: the script injection itself; any secret mapped into a job. The Demo 1 leak was a repo secret, so this fix would not have prevented it. `pr-greeter.yml` was checked with zizmor only, not re-run after the change.
+
+## Fix 3: stop the script injection (commits 0a6b0a1, 4394af1, b53c207)
+- 3a: PR title passed via `env: PR_TITLE` and referenced as `"$PR_TITLE"`, never inside the script text.
+- 3b: removed `DEMO_API_TOKEN` from the greeter job (it never needed a secret).
+- 3c: `pull_request_target` replaced by `pull_request`.
+
+Proof: the identical crafted title replayed.
+- After 3a (PR #7, run 45955540040, secret still mapped on purpose): title printed as plain text, no base64 output. Log: `measurements/demo1-retest-after-3a-log.txt`.
+- After 3c (PR #8, run 45955859269): same result, no secret in the environment. Log: `measurements/demo1-retest-after-3c-log.txt`.
+
+zizmor (same scope): 2 to 0 findings. Output: `measurements/after-fix3-zizmor.txt`.
+
+Not covered: other untrusted-text flows (action inputs, files read at runtime, AI steps); fork PRs not tested; "0 findings" excludes the stored static secret in the deploy job and the intentionally weak demo workflows.
