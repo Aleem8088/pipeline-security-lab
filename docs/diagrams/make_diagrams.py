@@ -1,4 +1,4 @@
-"""Builds docs/img/architecture.svg and docs/img/attack-two-pipelines.gif.
+"""Builds docs/img/architecture.svg (plus a PNG copy) and docs/img/attack-two-pipelines.gif.
 
 Needs: Python 3 with Pillow, and Microsoft Edge (headless) to rasterise SVG frames.
 Run from the repo root:  python docs/diagrams/make_diagrams.py
@@ -236,6 +236,13 @@ def main():
         pal[0].save(os.path.join(OUT, "attack-two-pipelines.gif"), save_all=True, append_images=pal[1:],
                     duration=[d for _, d in FRAMES], loop=0, optimize=True, disposal=1)
         imgs[4].save(os.path.join(OUT, "attack-two-pipelines-still.png"))
+        # PNG copy of the architecture for sites that don't accept SVG (Medium, LinkedIn), at 2x for sharpness.
+        arch_png = os.path.abspath(os.path.join(OUT, "architecture.png"))
+        subprocess.run([EDGE, "--headless=new", "--disable-gpu", "--hide-scrollbars", "--force-device-scale-factor=2",
+                        "--window-size=1280,730", f"--screenshot={arch_png}",
+                        "file:///" + os.path.abspath(os.path.join(OUT, "architecture.svg")).replace("\\", "/")],
+                       check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=60)
+        Image.open(arch_png).convert("RGB").crop((0, 0, 2560, 1280)).save(arch_png, optimize=True)
     print("ok")
 
 
